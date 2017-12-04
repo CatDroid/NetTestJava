@@ -288,12 +288,12 @@ public class MainActivity extends Activity  {
 								Log.d(TAG,"Network prefix length = " + ia.getNetworkPrefixLength());
 								Log.d(TAG," ");
 								/*
-								 	Address = /fe80::d648:dbff:fe32:8bf4%wlan0%75
+								 	Address = /fe80::d648:dbff:fe32:8bf4%wlan0%75  // IPv6地址
 									Broadcast = null
 									Network prefix length = 64
 									
 									Address = /192.168.43.1
-									Broadcast = /192.168.43.255
+									Broadcast = /192.168.43.255					    // IPv4地址
 									Network prefix length = 24
 								 */
 								

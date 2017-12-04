@@ -259,6 +259,14 @@ public class MainActivity extends Activity  {
 					@Override
 					public void run() {
 						DatagramSocket broadsocket;
+
+						// TCP socket时用 ServerSocket 和  Socket
+						// ServerSocket 提供 bind方法和 accept 方法
+						// Socket 提供 getInputStream和getOutputStream方法
+						// InetSocketAddress 保存地址信息
+						// http://blog.csdn.net/lijiecong/article/details/6335917
+						//
+
 						try {
 							broadsocket = new DatagramSocket();
 							broadsocket.setBroadcast(true);

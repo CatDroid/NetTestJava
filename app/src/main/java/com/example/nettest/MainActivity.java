@@ -365,16 +365,22 @@ public class MainActivity extends Activity  {
 						try {
 							
 							Log.d(TAG,"TRY TO GET IP ADDR ERROR"); 
-							
-							ByteBuffer rddata = ByteBuffer.allocateDirect(1300);
-							
+
+							// DatagramChannel是一个能收发UDP包的通道
 							DatagramChannel channel = DatagramChannel.open();
 							channel.configureBlocking(true);
 							DatagramSocket socket = channel.socket();
 							socket.setReuseAddress(true);
+							// 绑定UDP服务端端口
+							// 可以将DatagramChannel“连接”到网络中的特定地址的
+							// 由于UDP是无连接的，连接到特定地址并不会像TCP通道那样创建一个真正的连接
+							// 而是锁住DatagramChannel ，让其只能从特定地址收发数据
+							// channel.connect(new InetSocketAddress("jenkov.com", 80));
 							socket.bind(new InetSocketAddress(RTMP_CMD_PORT));
 							socket.setSoTimeout(6000); // 
-							
+
+							// DatagramChannel 接收数据  返回客户端地址
+							ByteBuffer rddata = ByteBuffer.allocateDirect(1300);
 							SocketAddress sa = channel.receive(rddata);
 							if( sa == null){
 								mRtmpAddr = null;

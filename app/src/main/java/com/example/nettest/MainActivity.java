@@ -262,6 +262,9 @@ public class MainActivity extends Activity  {
 						try {
 							broadsocket = new DatagramSocket();
 							broadsocket.setBroadcast(true);
+							// 一般在发送UDP数据报的时候，希望该socket发送的数据具有广播特性 允许套接口传送广播信息
+							// 如果不设置这个,就不能发送广播  sendto error: Permission denied 即使在root用户运行
+							// 在没有 SO_BROADCAST 标识设置的情况下发送一个包到广播地址  EACCES
 							
 							byte[] buffer = "Hello World".getBytes();
 							DatagramPacket packet = new DatagramPacket(buffer,buffer.length);
@@ -272,9 +275,10 @@ public class MainActivity extends Activity  {
 							//addr = InetAddress.getByAddress( new byte[]{(byte)192 ,(byte)168 , (byte)43 , (byte)255} );
 							
 							// 单播(Unicast) 多播(Multicast)  广播 (Broadcast) 
-							NetworkInterface ni =  NetworkInterface.getByName("wlan0");
+							NetworkInterface ni =  NetworkInterface.getByName("wlan0"); // rmnet_data0
+
+							// 获得某个网卡上所有地址信息  一个网卡可以有多个IP地址
 							List<InterfaceAddress> addresslist  = ni.getInterfaceAddresses();
-					 
 							Iterator<InterfaceAddress> it = addresslist.iterator();
 
 							while (it.hasNext()) {
@@ -297,7 +301,7 @@ public class MainActivity extends Activity  {
 									boardaddr = ia.getBroadcast() ;
 								}
 								
-							}
+							}// 先获取网卡的广播地址
 							 
 							if( boardaddr == null){
 								Log.e(TAG, "Can NOT found Boardcast Address");
@@ -309,6 +313,7 @@ public class MainActivity extends Activity  {
 							
 							packet.setPort(RTMP_CMD_PORT);
 							packet.setAddress(boardaddr);
+							// 发出广播包  地址是广播地址  端口是 RTMP_CMD_PORT 数据是 "Hello World"
 							
 							int try_time = 5 ;
 							while( try_time-- != 0 ){

@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.nettest.MainActivity" >
+
+    <Button
+        android:id="@+id/bRecv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bSend"
+        android:layout_alignBottom="@+id/bSend"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/bSend"
+        android:text="recv" />
+
+    <Button
+        android:id="@+id/bSend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="15dp"
+        android:text="1msec" />
+
+    <Button
+        android:id="@+id/bSend2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bSend"
+        android:layout_below="@+id/bSend"
+        android:layout_marginTop="23dp"
+        android:text="2msec" />
+
+    <Button
+        android:id="@+id/bSend3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bSend2"
+        android:layout_below="@+id/bSend2"
+        android:layout_marginTop="24dp"
+        android:text="50sec" />
+
+    <Button
+        android:id="@+id/bOpen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bSend3"
+        android:layout_below="@+id/bSend3"
+        android:layout_marginTop="30dp"
+        android:text="OpenRtmp" />
+
+    <Button
+        android:id="@+id/bClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bOpen"
+        android:layout_below="@+id/bOpen"
+        android:layout_marginTop="22dp"
+        android:text="CloseRtmp" />
+
+    <Button
+        android:id="@+id/bStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bClose"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="17dp"
+        android:text="GetRtmp" />
+
+    <TextView
+        android:id="@+id/txStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bStatus"
+        android:layout_toRightOf="@+id/bStatus"
+        android:text="Status unKnown"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/bGetIPAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/bRecv"
+        android:layout_alignTop="@+id/bSend2"
+        android:layout_marginTop="17dp"
+        android:text="获得广播地址" />
+
+    <TextView
+        android:id="@+id/txIPAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bSend3"
+        android:layout_toRightOf="@+id/bOpen"
+        android:text="IP unKnown"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/bSendIPAddr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bClose"
+        android:layout_toRightOf="@+id/bClose"
+        android:text="广播本机地址" />
+
+</RelativeLayout>

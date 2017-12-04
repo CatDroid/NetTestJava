@@ -118,6 +118,7 @@ public class MainActivity extends Activity  {
 			// TODO Auto-generated constructor stub
 		}
 
+		// 建立TCP socket 发送命令 MSG_OPEN:打开RTMP  MSG_CLOSE:关闭RTMP  MSG_STATUS:查询状态
 		@Override
 		public void handleMessage(Message msg) {
 			
@@ -165,6 +166,8 @@ public class MainActivity extends Activity  {
 				break;
 			case MSG_STATUS:
 				try {
+					// Socket 创建TCP socket 并绑定到本地端口
+					// 使用 getOutputStream  getInputStream 进行write和read
 					Socket socket = new Socket(mRtmpAddr.getHostString(),RTMP_CMD_PORT);
 					OutputStream outputStream = socket.getOutputStream();
 					String cmd = MSG_STATUS + "\n";
@@ -249,7 +252,8 @@ public class MainActivity extends Activity  {
 		});
 		
 	
-		
+
+		// 广播自己的地址
 		((Button)findViewById(R.id.bSendIPAddr)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -349,7 +353,9 @@ public class MainActivity extends Activity  {
 				
 			}
 		});
-		
+
+
+		// 获取设备IP地址
 		((Button)findViewById(R.id.bGetIPAddr)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

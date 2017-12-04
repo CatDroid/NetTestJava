@@ -415,7 +415,7 @@ public class MainActivity extends Activity  {
 		
 		
 		
-		
+		// 发送数据包 测试网速 UDP
 		((Button)findViewById(R.id.bSend)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -449,6 +449,8 @@ public class MainActivity extends Activity  {
 							Log.d(TAG, "sa = " + inetaddr.getPort() + " " + inetaddr.getHostString()  );
 							int video_frame_index = 0 ;
 							while( true ){
+								// 使用小端把序号 写到数据包
+								// 接收端可以 把byteBuffer通过asIntBuffer转成IntBuffer直接读取序号
 								snddata.put(0, (byte) ( video_frame_index & 0x000000FF  )        );
 								snddata.put(1, (byte) ( (video_frame_index & 0x0000FF00 ) >> 8 ) );
 								snddata.put(2, (byte) ( (video_frame_index & 0x00FF0000 ) >> 16) );
@@ -478,8 +480,9 @@ public class MainActivity extends Activity  {
 				
 			}
 		});
-		 
 
+
+		// 接收数据 测试网速
 		((Button)findViewById(R.id.bRecv)).setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -502,11 +505,12 @@ public class MainActivity extends Activity  {
 							channel.connect(new InetSocketAddress("192.168.43.1", 9999));
 							Log.d(TAG, "connect done ");
 							// channel.socket().setReuseAddress(true);
-							channel.write(ByteBuffer.wrap(new String("aaaa").getBytes()));  
+							// 先随便发数据给‘发送数据端’ ，要确保 ‘发送数据端’ 先起来 , ‘发送数据端’ 是后面发送测试数据包的一段(服务端)
+							channel.write(ByteBuffer.wrap(new String("aaaa").getBytes()));
 							channel.register(selector, SelectionKey.OP_READ);  
 							Log.d(TAG, "register done ");
 							ByteBuffer rndbuf = ByteBuffer.allocateDirect(1300);
-							rndbuf.order(ByteOrder.nativeOrder());
+							rndbuf.order(ByteOrder.nativeOrder()); // 小端
 							IntBuffer readbuf = rndbuf.asIntBuffer();
 							int last_num = 0 ;
 					        while (selector.select() > 0) {   

@@ -439,7 +439,7 @@ public class MainActivity extends Activity  {
 							ByteBuffer rddata = ByteBuffer.allocateDirect(1300);
 							ByteBuffer snddata = ByteBuffer.allocateDirect(1300);
 							SocketAddress sa = channel.receive(rddata);
-							InetSocketAddress inetaddr = (InetSocketAddress)sa ; 
+							InetSocketAddress inetaddr = (InetSocketAddress)sa ; // InetSocketAddress 是 SocketAddress 派生类
 							Log.d(TAG, "sa = " + inetaddr.getPort() + " " + inetaddr.getHostString()  );
 							int video_frame_index = 0 ;
 							while( true ){
